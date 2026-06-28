@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>🎂 Joyeux Anniversaire Mon Amour 🎂</title>
+    <!-- Polices élégantes -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Lien vers le fichier JavaScript externe -->
+    <script src="index.js" defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 20% 20%, #1a0c0c, #0d0505);
+            font-family: 'Playfair Display', 'Amiri', serif;
+            padding: 16px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* --- Bougies scintillantes (candles) --- */
+        .candles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .candle {
+            position: absolute;
+            bottom: 5%;
+            font-size: 2.8rem;
+            user-select: none;
+            animation: flicker 1.8s infinite alternate ease-in-out;
+            text-shadow: 0 0 30px #ffaa44, 0 0 60px #ff8800;
+            transform-origin: bottom;
+            opacity: 0.9;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(0deg); text-shadow: 0 0 20px #ffaa44, 0 0 40px #ff8800; }
+            50% { transform: scale(1.08) rotate(2deg); text-shadow: 0 0 40px #ffcc66, 0 0 80px #ff9900; }
+            100% { transform: scale(0.95) rotate(-2deg); text-shadow: 0 0 25px #ffbb55, 0 0 60px #ff7700; }
+        }
+
+        @media (max-width: 600px) {
+            .candle { font-size: 2.2rem; }
+        }
+        @media (max-width: 400px) {
+            .candle { font-size: 1.8rem; }
+        }
+
+        /* --- Carte principale --- */
+        .card-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 720px;
+            perspective: 1200px;
+            cursor: pointer;
+        }
+
+        .gift-box {
+            background: linear-gradient(145deg, #7a2a2a, #4d1717);
+            border-radius: 60px 60px 30px 30px;
+            padding: 40px 30px 30px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 3px #c47a7a inset, 0 0 0 6px #ffd6d6 inset;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 1px solid #ffbaba;
+            position: relative;
+            backdrop-filter: blur(2px);
+            transform-style: preserve-3d;
+        }
+
+        .gift-box .seal {
+            font-size: 2.8rem;
+            letter-spacing: 8px;
+            color: #fad6a0;
+            text-shadow: 0 0 20px #ffbb77;
+            background: rgba(255, 200, 150, 0.15);
+            padding: 12px 20px;
+            border-radius: 80px;
+            backdrop-filter: blur(4px);
+            border: 1px solid #f0b080;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .gift-box h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fce3d4;
+            text-shadow: 0 4px 20px #a04040;
+            font-family: 'Playfair Display', serif;
+            margin: 15px 0 10px;
+            letter-spacing: 2px;
+            word-break: break-word;
+        }
+
+        .gift-box .sub {
+            font-size: 1.4rem;
+            color: #f5cfc0;
+            font-family: 'Amiri', serif;
+            border-top: 2px dashed #dba08a;
+            border-bottom: 2px dashed #dba08a;
+            padding: 10px 0;
+            display: inline-block;
+            background: rgba(100, 40, 40, 0.2);
+            border-radius: 60px;
+            padding: 8px 28px;
+            backdrop-filter: blur(2px);
+            margin: 6px 0 12px;
+        }
+
+        .gift-box .click-hint {
+            font-size: 1.3rem;
+            color: #f5d0b0;
+            background: rgba(0,0,0,0.2);
+            padding: 8px 18px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            display: inline-block;
+            margin-top: 14px;
+            border: 1px solid #dc9a7a;
+            animation: pulseHint 2s infinite;
+        }
+
+        @keyframes pulseHint {
+            0% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.7; transform: scale(1); }
+        }
+
+        /* --- Lettre cachée --- */
+        .letter-content {
+            display: none;
+            margin-top: 30px;
+            padding: 25px 20px 20px;
+            background: rgba(255, 245, 235, 0.93);
+            backdrop-filter: blur(6px);
+            border-radius: 50px 12px 50px 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 2px #dcb0a0 inset;
+            direction: rtl;
+            font-family: 'Amiri', 'Playfair Display', serif;
+            text-align: center;
+            border: 2px solid #f5d0c0;
+            animation: fadeLetter 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes fadeLetter {
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .letter-content p {
+            font-size: 1.9rem;
+            line-height: 2.5rem;
+            font-weight: 400;
+            color: #2d1414;
+            margin-bottom: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .letter-content .signature {
+            font-size: 1.7rem;
+            font-style: italic;
+            color: #7a3a3a;
+            border-top: 2px solid #dbb0a0;
+            padding-top: 18px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .letter-content .signature small {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #a55a4a;
+        }
+
+        .letter-content .deco {
+            font-size: 2.6rem;
+            display: block;
+            margin: 6px 0 8px;
+        }
+
+        /* État ouvert */
+        .card-wrapper.open .gift-box .click-hint,
+        .card-wrapper.open .gift-box .seal {
+            display: none;
+        }
+
+        .card-wrapper.open .letter-content {
+            display: block;
+        }
+
+        .card-wrapper.open .gift-box {
+            background: linear-gradient(145deg, #5e2020, #3a1010);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 3px #b06a6a inset, 0 0 0 6px #ffd0d0 inset;
+            transition: all 0.4s ease;
+        }
+
+        @media (max-width: 600px) {
+            .gift-box h1 { font-size: 2.2rem; }
+            .gift-box .sub { font-size: 1.1rem; }
+            .letter-content p { font-size: 1.5rem; line-height: 2.0rem; }
+            .letter-content .signature { font-size: 1.4rem; }
+            .gift-box { padding: 30px 18px 25px; }
+        }
+
+        @media (max-width: 400px) {
+            .gift-box h1 { font-size: 1.8rem; }
+            .letter-content p { font-size: 1.2rem; line-height: 1.7rem; }
+            .letter-content .signature { font-size: 1.2rem; }
+        }
+
+        .card-wrapper {
+            transition: transform 0.2s ease;
+        }
+        .card-wrapper:active {
+            transform: scale(0.97);
+        }
+
+        .heart-beat {
+            display: inline-block;
+            animation: beat 1.4s infinite;
+        }
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            20% { transform: scale(1.3); }
+            40% { transform: scale(1); }
+            60% { transform: scale(1.2); }
+            80% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Bougies scintillantes -->
+<div class="candles-container" id="candlesContainer"></div>
+
+<!-- Carte / Cadeau -->
+<div class="card-wrapper" id="cardWrapper">
+    <div class="gift-box" id="giftBox">
+        <div class="seal">🎀  🎁  🎀</div>
+
+        <h1>🎂 Joyeux Anniversaire 🎂</h1>
+        <div class="sub">💖  حبيبتي  💖</div>
+
+        <div class="click-hint">
+            <span class="heart-beat">💝</span>  اضغطي لفتح الهدية  <span class="heart-beat">🎁</span>
+            <br><small style="font-size: 0.8rem;">(Clique sur le cadeau pour découvrir la lettre)</small>
+        </div>
+
+        <!-- Lettre d'amour en arabe -->
+        <div class="letter-content" id="letterContent">
+            <span class="deco">🌸 🌙 🌸</span>
+            <p>
+                حبيبتي الغالية،<br>
+                في يوم ميلادكِ، أهديكِ قلبي.<br>
+                أنتِ نجمتي التي تضيء ليلي.<br>
+                كل عام وأنتِ بخير،<br>
+                وأتمنى أن تكون كل أيامكِ فرحاً.<br>
+                أحبكِ بكل ما في الكون من جمال.<br>
+                أنتِ أجمل هدية في حياتي.
+            </p>
+            <div class="signature">
+                ❤️  توأم روحك  ❤️
+                <br>
+                <small>—  toujours à toi  —</small>
+            </div>
+            <span class="deco">💋 💖 💋</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
